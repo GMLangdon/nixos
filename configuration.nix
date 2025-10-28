@@ -171,7 +171,8 @@
     steam
     gitkraken
     heroic
-
+    code-cursor
+    gpodder
 
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
