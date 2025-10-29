@@ -173,6 +173,10 @@
     heroic
     code-cursor
     gpodder
+    libreoffice
+    jq
+    chromium
+
 
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
