@@ -136,6 +136,14 @@
     ];
   };
 
+  systemd.user.services.nextcloud-client = {
+    description = "Nextcloud desktop sync client";
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud";
+    };
+  };
+
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
@@ -176,7 +184,8 @@
     libreoffice
     jq
     chromium
-
+    pkgs.mpv
+    vlc
 
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
