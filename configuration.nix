@@ -136,11 +136,13 @@
     ];
   };
 
+
   systemd.user.services.nextcloud-client = {
     description = "Nextcloud desktop sync client";
-    wantedBy = [ "default.target" ];
+    wantedBy = [ "graphical-session.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud";
+      Restart = "on-failure";
     };
   };
 
@@ -186,6 +188,8 @@
     chromium
     pkgs.mpv
     vlc
+    neofetch
+
 
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
