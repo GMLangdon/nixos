@@ -16,6 +16,8 @@
   boot.supportedFilesystems = [ "nfs" ];
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "sg" ];
+
   
 
   hardware.bluetooth = {
@@ -189,7 +191,8 @@
     pkgs.mpv
     vlc
     neofetch
-
+    makemkv
+    qalculate-gtk
 
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
