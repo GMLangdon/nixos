@@ -161,6 +161,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+    #rust
+    rustup         # installer and toolchain manager
+    cargo          # Rust package manager
+    rustc          # compiler (if you prefer a static toolchain)
+    pkg-config     # needed for many crates with native deps
+    openssl        # common dependency
+    cmake          # for building native libs
+    clang          # for crates using bindgen
+    #rust end
+
     vim
     wget
     git
@@ -193,6 +204,8 @@
     neofetch
     makemkv
     qalculate-gtk
+    signal-desktop
+    emacs
 
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
