@@ -18,7 +18,20 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "sg" ];
 
-  
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr          # ROCm OpenCL runtime
+      rocmPackages.rocminfo     # for checking GPU compute
+      rocmPackages.rocm-smi     # system management interface
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-tools
+      mesa-demos
+      libva-utils
+    ];
+  };
 
   hardware.bluetooth = {
     enable = true;
@@ -95,12 +108,6 @@
     variant = "extd";
   };
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-
   # Configure console keymap
   console.keyMap = "uk";
 
@@ -172,6 +179,11 @@
     clang          # for crates using bindgen
     #rust end
 
+    kdePackages.filelight
+    pciutils
+    usbutils
+    lm_sensors
+    nvme-cli
     vim
     wget
     git
