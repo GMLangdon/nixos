@@ -179,6 +179,7 @@
     clang          # for crates using bindgen
     #rust end
 
+    calibre
     kdePackages.filelight
     pciutils
     usbutils
