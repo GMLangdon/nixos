@@ -179,6 +179,10 @@
     clang          # for crates using bindgen
     #rust end
 
+    wine       # 32-bit support included if you enable multilib
+    wineWowPackages.stableFull  # good all-rounder for gaming
+    winetricks
+    lutris
     calibre
     kdePackages.filelight
     pciutils
