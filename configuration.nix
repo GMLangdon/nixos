@@ -60,7 +60,7 @@
   services.libinput = {
     enable = true;
     mouse = {
-      accelProfile = "adaptive";  # or "flat"
+      accelProfile = "adaptive";  # or "flat"picard
       accelSpeed = "1.0";         # must be quoted
     };
   };
@@ -179,6 +179,7 @@
     clang          # for crates using bindgen
     #rust end
 
+    picard
     wine       # 32-bit support included if you enable multilib
     wineWowPackages.stableFull  # good all-rounder for gaming
     winetricks
