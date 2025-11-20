@@ -17,6 +17,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "sg" ];
+  services.displayManager.sddm.wayland.enable = true;
 
   hardware.graphics = {
     enable = true;
@@ -65,6 +66,17 @@
     };
   };
 
+  services.displayManager.sddm.settings = {
+    General = {
+      DisplayServer = "wayland";
+      GreeterEnvironment = "QT_QPA_PLATFORM=wayland";
+    };
+    Wayland = {
+      EnableVT = true;
+    };
+  };
+
+
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -94,19 +106,11 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.xserver.enable = false;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "extd";
-  };
 
   # Configure console keymap
   console.keyMap = "uk";
