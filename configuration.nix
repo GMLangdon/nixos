@@ -160,6 +160,13 @@
     ];
   };
 
+  services.udev.extraRules = ''
+    # Disable BAD adapter (hci1)
+    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci1", RUN+="${pkgs.bluez}/bin/btmgmt --index 1 power off"
+
+    # Ensure GOOD adapter (hci0) is enabled
+    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci0", RUN+="${pkgs.bluez}/bin/btmgmt --index 0 power on"
+  '';
 
   systemd.user.services.nextcloud-client = {
     description = "Nextcloud desktop sync client";
