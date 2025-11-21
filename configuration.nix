@@ -161,12 +161,15 @@
   };
 
   services.udev.extraRules = ''
-    # Disable BAD adapter (hci1)
-    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci1", RUN+="${pkgs.bluez}/bin/btmgmt --index 1 power off"
+    # Disable BAD adapter (hci1) only if it exists
+    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci1", \
+      RUN+="/bin/sh -c 'test -e /sys/class/bluetooth/hci1 && ${pkgs.bluez}/bin/btmgmt --index 1 power off'"
 
-    # Ensure GOOD adapter (hci0) is enabled
-    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci0", RUN+="${pkgs.bluez}/bin/btmgmt --index 0 power on"
+    # Enable GOOD adapter (hci0) only if it exists
+    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci0", \
+      RUN+="/bin/sh -c 'test -e /sys/class/bluetooth/hci0 && ${pkgs.bluez}/bin/btmgmt --index 0 power on'"
   '';
+
 
   systemd.user.services.nextcloud-client = {
     description = "Nextcloud desktop sync client";
