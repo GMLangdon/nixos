@@ -202,7 +202,7 @@
     cmake          # for building native libs
     clang          # for crates using bindgen
     #rust end
-
+    abcde
     picard
     wine       # 32-bit support included if you enable multilib
     wineWowPackages.stableFull  # good all-rounder for gaming
