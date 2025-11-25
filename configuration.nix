@@ -10,9 +10,10 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.grub.enable = false;
+  boot.loader.efi.canTouchEfiVariables = false;
+
   boot.supportedFilesystems = [ "nfs" ];
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
