@@ -153,7 +153,7 @@
   users.users.gandalf = {
     isNormalUser = true;
     description = "gandalf";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd"];
     packages = with pkgs; [
       kdePackages.kate
       keepassxc 
@@ -251,9 +251,20 @@
     emacs
     gparted
     udisks2
+    popsicle
     # Salesforce CLI via flake
-    #(builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
+    (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
   ];
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemuOvmf = true;  # UEFI support
+    qemuVerbatimConfig = ''
+      # ensure KVM acceleration
+    '';
+  };
+
+  programs.virt-manager.enable = true;
 
   programs.steam = {
     enable = true;
