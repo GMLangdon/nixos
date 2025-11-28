@@ -252,7 +252,7 @@
     gparted
     udisks2
     # Salesforce CLI via flake
-    (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
+    #(builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
   ];
 
   programs.steam = {
