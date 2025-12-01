@@ -340,6 +340,19 @@
       ];
   };
 
+  fileSystems."/mnt/games" = {
+    device = "192.168.68.76:/mnt/tank/media/games";
+    fsType = "nfs";
+      options = [
+        "nfsvers=4"
+        "proto=tcp"
+        "_netdev"
+        "noatime"
+        "x-systemd.automount"
+        "noauto"
+      ];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
