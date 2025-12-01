@@ -10,15 +10,20 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.grub.enable = false;
-  boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Required for a proper graphical environment
+  services.xserver.enable = true;
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   boot.supportedFilesystems = [ "nfs" ];
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "sg" ];
-  services.displayManager.sddm.wayland.enable = true;
 
   hardware.graphics = {
     enable = true;
@@ -105,10 +110,6 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
   services.xserver.xkb = {
     layout = "gb";
     variant = "";
@@ -153,7 +154,7 @@
   users.users.gandalf = {
     isNormalUser = true;
     description = "gandalf";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd"];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "dialout"];
     packages = with pkgs; [
       kdePackages.kate
       keepassxc 
@@ -194,6 +195,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    thonny
     #rust
     rustup         # installer and toolchain manager
     cargo          # Rust package manager
