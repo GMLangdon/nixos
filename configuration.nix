@@ -252,6 +252,8 @@
     gparted
     udisks2
     popsicle
+
+    spice-vdagent
     # Salesforce CLI via flake
     (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
   ];
