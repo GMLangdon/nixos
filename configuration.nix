@@ -262,7 +262,6 @@
 
   virtualisation.libvirtd = {
     enable = true;
-    qemuOvmf = true;  # UEFI support
     qemuVerbatimConfig = ''
       # ensure KVM acceleration
     '';
