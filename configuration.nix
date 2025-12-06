@@ -260,7 +260,7 @@
 
     spice-vdagent
     # Salesforce CLI via flake
-    (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.system}.default
+    (builtins.getFlake "github:rfaulhaber/sfdx-nix").packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   virtualisation.libvirtd = {
