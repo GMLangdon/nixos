@@ -23,7 +23,7 @@
   boot.supportedFilesystems = [ "nfs" ];
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "sg" ];
+  boot.kernelModules = [ "sg" "fuse" ];
 
   hardware.graphics = {
     enable = true;
@@ -195,6 +195,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    fuse
+    appimage-run
+    orca-slicer
     thonny
     #rust
     rustup         # installer and toolchain manager
@@ -262,7 +265,7 @@
 
   virtualisation.libvirtd = {
     enable = true;
-    qemuVerbatimConfig = ''
+    qemu.verbatimConfig = ''
       # ensure KVM acceleration
     '';
   };
