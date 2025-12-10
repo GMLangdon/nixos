@@ -122,34 +122,25 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+  services.pipewire.wireplumber.extraConfig = {
+    "99-bluetooth-policy" = {
+      "bluez_monitor.properties" = {
+        # Allow HSP/HFP so Sony can complete the initial handshake
+        "bluez5.enable-hsp" = true;
+        "bluez5.enable-hfp" = true;
+        "bluez5.enable-msbc" = true;
 
-    wireplumber = {
-      enable = true;
+        # Force A2DP as soon as the connection is established
+        "bluez5.auto-connect" = [ "a2dp_sink" ];
+        "bluez5.profile" = "a2dp_sink";
 
-      extraConfig = {
-        "99-bluetooth-policy" = {
-          "monitor.bluez.properties" = {
-            "bluez5.enable-hsp" = false;
-            "bluez5.enable-hfp" = false;
-            "bluez5.enable-msbc" = false;
-
-            "bluez5.enable-aac" = true;
-            "bluez5.enable-sbc-xq" = true;
-            "bluez5.enable-ldac" = true;
-          };
-        };
+        # Enable high-quality codecs
+        "bluez5.enable-aac" = true;
+        "bluez5.enable-ldac" = true;
+        "bluez5.enable-sbc-xq" = true;
       };
     };
-
   };
-
-
 
   users.users.gandalf = {
     isNormalUser = true;
