@@ -45,12 +45,6 @@
     powerOnBoot = true;
     settings = {
       General = {
-        # Shows battery charge of connected devices on supported
-        # Bluetooth adapters. Defaults to 'false'.
-        Experimental = true;
-        # When enabled other devices can connect faster to us, however
-        # the tradeoff is increased power consumption. Defaults to
-        # 'false'.
         FastConnectable = true;
       };
       Policy = {
@@ -161,16 +155,6 @@
     #  thunderbird
     ];
   };
-
-  services.udev.extraRules = ''
-    # Disable BAD adapter (hci1) only if it exists
-    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci1", \
-      RUN+="/bin/sh -c 'test -e /sys/class/bluetooth/hci1 && ${pkgs.bluez}/bin/btmgmt --index 1 power off'"
-
-    # Enable GOOD adapter (hci0) only if it exists
-    ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci0", \
-      RUN+="/bin/sh -c 'test -e /sys/class/bluetooth/hci0 && ${pkgs.bluez}/bin/btmgmt --index 0 power on'"
-  '';
 
 
   systemd.user.services.nextcloud-client = {
