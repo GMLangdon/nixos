@@ -180,6 +180,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     postman
+    yt-dlp
     fritzing
     ffmpeg
     fuse
