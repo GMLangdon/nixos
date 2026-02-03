@@ -180,6 +180,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     gimp
+    cryptsetup
     postman
     yt-dlp
     fritzing
