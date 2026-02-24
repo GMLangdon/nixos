@@ -85,6 +85,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.nat.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
