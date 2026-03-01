@@ -170,9 +170,6 @@
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -348,6 +345,21 @@
         "noauto"
       ];
   };
+
+  environment.etc."librewolf/policies.json".text = builtins.toJSON {
+    policies = {
+      DisableFirefoxStudies = true;
+      DisableTelemetry = true;
+      Preferences = {
+        "privacy.clearOnShutdown.history" = false;
+        "privacy.clearOnShutdown.cookies" = false;
+        "privacy.clearOnShutdown.downloads" = false;
+        "privacy.clearOnShutdown.formdata" = false;
+        "places.history.enabled" = true;
+      };
+    };
+  };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
