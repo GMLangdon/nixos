@@ -177,6 +177,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    ollama
     emacs
     librewolf
     gimp
@@ -359,6 +360,12 @@
         "places.history.enabled" = true;
       };
     };
+  };
+
+  nixpkgs.config.packageOverrides = pkgs: rec {
+    valkey = pkgs.valkey.overrideAttrs (old: {
+      doCheck = false;
+    });
   };
 
 
