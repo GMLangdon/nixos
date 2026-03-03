@@ -170,6 +170,9 @@
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
+  # Install firefox.
+  programs.firefox.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
